@@ -1,0 +1,37 @@
+<section data-ng-controller="ProjectsController">
+  <div class="page-header">
+    <h1>Create a project</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="createProjectForm" class="form-horizontal" ng-submit="create(createProjectForm.$valid)">
+    <fieldset>
+      <!-- Name -->
+      <div class="form-group" show-errors>
+        <label class="form-group" for="name">Name</label>
+        <input name="name" type="text" ng-model="newProject.name" class="form-control" placeholder="Name" ng-pattern="/.{4,}/" required ng-trim />
+        <div ng-messages="createProjectForm.name.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">Project name is required.</p>
+        </div>
+      </div>
+      <!-- Description -->
+      <div class="form-group">
+        <label class="control-label" for="description">Description</label>
+        <textarea name="description" data-ng-model="newProject.description" id="description" class="form-control" cols="30" rows="10" placeholder="Description"></textarea>
+      </div>
+      <!-- Members -->
+      <div class="form-group row">
+        <select
+          data-placeholder="Choose your members..."
+          class="chosen-select col-md-6 col-xs-12"
+          ng-model="newProject.selectedMembers"
+          ng-options="user._id as user.username for user in users"
+          chosen
+          multiple>
+      </select>
+      <br />
+      <button class="btn btn-primary top20" value="submit">Create</button>
+      </div>
+    </fieldset>
+    </form>
+  </div>
+</section>

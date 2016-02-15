@@ -1,0 +1,14 @@
+.create-button {
+  float: right;
+  position: relative;
+  top: 20px;
+  right: 10px;
+}
+
+.top20 {
+	margin-top: 20px;
+}
+
+textarea {
+    resize: vertical;
+}
