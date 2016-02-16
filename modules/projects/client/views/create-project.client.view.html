@@ -23,7 +23,7 @@
         <select
           data-placeholder="Choose your members..."
           class="chosen-select col-md-6 col-xs-12"
-          ng-model="newProject.selectedMembers"
+          ng-model="newProject.members"
           ng-options="user._id as user.username for user in users"
           chosen
           multiple>

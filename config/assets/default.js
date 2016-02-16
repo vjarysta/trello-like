@@ -7,7 +7,8 @@ module.exports = {
         'public/lib/bootstrap/dist/css/bootstrap.css',
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
         'public/lib/chosen/chosen.min.css',
-        'public/lib/angular-chosen-localytics/chosen-spinner.css'
+        'public/lib/angular-chosen-localytics/chosen-spinner.css',
+        'public/lib/sweetalert/dist/sweetalert.css'
       ],
       js: [
         'public/lib/jquery/dist/jquery.min.js',
@@ -22,7 +23,8 @@ module.exports = {
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/underscore/underscore-min.js',
         'public/lib/chosen/chosen.jquery.min.js',
-        'public/lib/angular-chosen-localytics/chosen.js'
+        'public/lib/angular-chosen-localytics/chosen.js',
+        'public/lib/sweetalert/dist/sweetalert.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

@@ -22,7 +22,8 @@
     "by",
     "browser",
     "element",
-    "$"
+    "$",
+    "swal"
   ],
   "devel": true // Allow development statements e.g. `console.log();`.
 }
