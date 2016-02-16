@@ -50,5 +50,13 @@ exports.delete = function (req, res) {
  * List of 
  */
 exports.list = function (req, res) {
-
+  Project.find().sort('-created').populate('owner').exec(function(err, projects) {
+    if (err) {
+      return res.status(400).send({
+        message: 'Error while getting projects list'
+      });
+    } else {
+      res.json(projects);
+    }
+  });
 };

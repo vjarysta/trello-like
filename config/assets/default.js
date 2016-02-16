@@ -8,7 +8,8 @@ module.exports = {
         'public/lib/bootstrap/dist/css/bootstrap-theme.css',
         'public/lib/chosen/chosen.min.css',
         'public/lib/angular-chosen-localytics/chosen-spinner.css',
-        'public/lib/sweetalert/dist/sweetalert.css'
+        'public/lib/sweetalert/dist/sweetalert.css',
+        'public/lib/components-font-awesome/css/font-awesome.min.css'
       ],
       js: [
         'public/lib/jquery/dist/jquery.min.js',

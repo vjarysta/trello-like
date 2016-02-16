@@ -1,6 +1,28 @@
-<section class="container" data-ng-controller="ProjectsController">
+<section class="container" data-ng-controller="ProjectsController" ng-init="list()">
   <div class="page-header">
-    <h1 style="float: left;">Projects List</h1>
-  	<button class="btn btn-primary create-button" ui-sref="create-project">Create</button>
+    <h1>Projects List</h1>
+  </div>
+  <div class="list-group">
+    <!--Projects list-->
+    <a ng-repeat="project in projects" ui-sref="articles.view({ articleId: article._id })" class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="project.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="project.owner" ng-bind="project.owner.displayName"></span>
+        <span ng-if="!project.owner">Deleted Owner</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="project.name"></h4>
+      <p class="list-group-item-text" ng-bind="project.description"></p>
+    </a>
+    <!--New project button-->
+    <a ui-sref="create-project" class="list-group-item plus-card">
+      <h1 class="white-text i-wrapper">
+        <i class="fa fa-plus-circle"></i>
+      </h1>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="projects.$resolved && !projects.length">
+    No Project yet, why don't you <a ui-sref="create-project">create one</a>?
   </div>
 </section>

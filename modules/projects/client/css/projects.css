@@ -12,3 +12,20 @@
 textarea {
     resize: vertical;
 }
+
+.plus-card {
+  text-align: center;
+  background-color: #3C763D;
+}
+
+.plus-card:hover {
+  background-color: #305C30 !important;
+}
+
+.white-text {
+  color: white;
+}
+
+.i-wrapper {
+  margin-bottom: 15px;
+}
