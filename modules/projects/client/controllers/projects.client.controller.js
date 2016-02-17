@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('projects').controller('ProjectsController', ['$scope', 'Authentication', 'Admin', 'Projects', '$http',
-  function ($scope, Authentication, Admin, Projects, $http) {
+angular.module('projects').controller('ProjectsController', ['$scope', 'Authentication', 'Admin', 'Projects', '$http', '$stateParams',
+  function ($scope, Authentication, Admin, Projects, $http, $stateParams) {
     /*
     ** Runs at controller startup
     */
@@ -50,6 +50,22 @@ angular.module('projects').controller('ProjectsController', ['$scope', 'Authenti
       
       Projects.query()
         .$promise.then(successCallback, errorCallback);
+    };
+    
+    /*
+    ** Get the current project given in url params
+    */
+    $scope.read = function() {
+      Projects.get({
+        projectId: $stateParams.projectId
+      }).$promise.then(function(res, err) {
+        if (err) {
+          swal("Oops...", "Something went wrong!", "error");
+        } else {
+          console.log(res);
+          $scope.project = res;
+        }
+      });
     };
   }
 ]);

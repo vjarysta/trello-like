@@ -8,4 +8,11 @@ module.exports = function(app) {
     .get(projects.list)
     .post(projects.create);
   
+  app.route('/api/projects/:projectId')
+    .get(projects.read)
+    .put(projects.update)
+    .delete(projects.delete);
+    
+  // Finish by binding the article middleware
+  app.param('projectId', projects.ProjectByID);
 };

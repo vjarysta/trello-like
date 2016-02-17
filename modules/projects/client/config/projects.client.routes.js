@@ -12,6 +12,10 @@ angular.module('projects', ['localytics.directives']).config(['$stateProvider',
       .state('projects-list', {
         url: '/projects',
         templateUrl: 'modules/projects/client/views/projects-list.client.view.html'
+      })
+      .state('project-view', {
+        url: '/projects/:projectId',
+        templateUrl: 'modules/projects/client/views/project-view.client.view.html',
       });
   }
 ]);

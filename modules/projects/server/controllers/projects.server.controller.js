@@ -29,7 +29,13 @@ exports.create = function (req, res) {
  * Show the current 
  */
 exports.read = function (req, res) {
-
+  var project = req.project ? req.project.toJSON() : {};
+  
+  // Add a custom field to the Project, for determining if the current User is the "owner".
+  // NOTE: This field is NOT persisted to the database, since it doesn't exist in the Project model
+  project.isCurrentUserOwner = req.user && project.owner && project.owner._id.toString() === req.user._id.toString() ? true : false;
+  
+  res.json(project);
 };
 
 /**
@@ -59,4 +65,30 @@ exports.list = function (req, res) {
       res.json(projects);
     }
   });
+};
+
+/*
+** Project middleware
+*/
+
+exports.ProjectByID = function(req, res, next, id) {
+  
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({
+      message: 'Project is invalid'
+    });
+  }
+  
+  Project.findById(id).populate('owner').exec(function(err, project) {
+    if (err) {
+      return next(err);
+    } else if (!project) {
+      return res.status(404).send({
+        message: 'No project with that identifier has been found'
+      });
+    }
+    req.project = project;
+    next();
+  });
+  
 };

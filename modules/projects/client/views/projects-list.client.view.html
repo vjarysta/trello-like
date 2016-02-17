@@ -4,7 +4,7 @@
   </div>
   <div class="list-group">
     <!--Projects list-->
-    <a ng-repeat="project in projects" ui-sref="articles.view({ articleId: article._id })" class="list-group-item">
+    <a ng-repeat="project in projects" ui-sref="project-view({ projectId: project._id })" class="list-group-item">
       <small class="list-group-item-text">
         Posted on
         <span ng-bind="project.created | date:'mediumDate'"></span>
