@@ -1,35 +1,37 @@
-<section data-ng-controller="ProjectsController">
-  <div class="t_list">
-    <div class="card card-block">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-    <div class="card card-block">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-    <div class="card card-block">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-    <div class="card card-block">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-    <div class="card card-block">
-      <h4 class="card-title">Card title</h4>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-
+<section data-ng-controller="ProjectsController" ng-init="read()">
+  <div class="page-header">
+    <h1>Edit {{project.name}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="editProjectForm" class="form-horizontal" ng-submit="update(editProjectForm.$valid)">
+    <fieldset>
+      <!-- Name -->
+      <div class="form-group" show-errors>
+        <label class="form-group" for="name">Name</label>
+        <input name="name" type="text" ng-model="project.name" class="form-control" placeholder="Name" ng-pattern="/.{4,}/" required ng-trim />
+        <div ng-messages="editProjectForm.name.$error" role="alert">
+          <p class="help-block error-text" ng-message="required">Project name is required.</p>
+        </div>
+      </div>
+      <!-- Description -->
+      <div class="form-group">
+        <label class="control-label" for="description">Description</label>
+        <textarea name="description" data-ng-model="project.description" id="description" class="form-control" cols="30" rows="10" placeholder="Description"></textarea>
+      </div>
+      <!-- Members -->
+      <div class="form-group row">
+        <select
+          data-placeholder="Choose your members..."
+          class="chosen-select col-md-6 col-xs-12"
+          ng-model="project.members"
+          ng-options="user._id as user.username for user in users"
+          chosen
+          multiple>
+      </select>
+      <br />
+      <button class="btn btn-primary top20" value="submit">Edit</button>
+      </div>
+    </fieldset>
+    </form>
   </div>
 </section>

@@ -5,6 +5,8 @@
  */
 var mongoose = require('mongoose'),
   _ = require('lodash'),
+  path = require('path'),
+  errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   Project = mongoose.model('Project');
 
 /**
@@ -42,14 +44,40 @@ exports.read = function (req, res) {
  * Update a 
  */
 exports.update = function (req, res) {
-
+  var project = req.project;
+  
+  console.log(req.body);
+  project.name = req.body.name;
+  project.description = req.body.description;
+  project.members = req.body.members;
+  project.save(function(err) {
+    if (err) {
+      console.log('error');
+      console.log(err);
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.json(project);
+    }
+  });
 };
 
 /**
  * Delete an 
  */
 exports.delete = function (req, res) {
-
+  var project = req.project;
+  
+  project.remove(function(err) {
+    if (err) {
+      return res.status(400).send({
+        message: 'Cannot remove this project'
+      });
+    } else {
+      res.json(project);
+    }
+  });
 };
 
 /**

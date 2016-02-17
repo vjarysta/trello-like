@@ -18,7 +18,7 @@ var ProjectsSchema = new Schema({
     type: String,
     default: '',
     trim: true,
-    required: 'Your project requires a name!'
+    required: 'Your project requires a valid name!'
   },
   description: {
     type: String,

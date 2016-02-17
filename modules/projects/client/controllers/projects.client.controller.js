@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('projects').controller('ProjectsController', ['$scope', 'Authentication', 'Admin', 'Projects', '$http', '$stateParams',
-  function ($scope, Authentication, Admin, Projects, $http, $stateParams) {
+angular.module('projects').controller('ProjectsController', ['$scope', 'Authentication', 'Admin', 'Projects', '$http', '$stateParams', '$state',
+  function ($scope, Authentication, Admin, Projects, $http, $stateParams, $state) {
     /*
     ** Runs at controller startup
     */
@@ -26,13 +26,18 @@ angular.module('projects').controller('ProjectsController', ['$scope', 'Authenti
     $scope.create = function(isValid) {
       Projects.save($scope.newProject)
         .$promise.then(function(res, err) {
-          if (err) {
-            console.log(err);
-            swal('Oops...', 'Something went wrong!', 'error');
-          } else {
-            console.log(res);
-            swal('Good job!', 'Your project is now created', 'success');
-          }
+          swal({
+            title: 'Good job!',
+            text: 'Your project is now created',
+            type: 'success',
+            closeOnConfirm: true
+          },
+          function() {
+            $scope.list();
+            $state.go('project-view', { projectId: res._id });
+          });
+        }, function(err) {
+          swal('Oops...', err.data.message, 'error');
         });
     };
     
@@ -64,7 +69,6 @@ angular.module('projects').controller('ProjectsController', ['$scope', 'Authenti
         if (err) {
           swal('Oops...', 'Something went wrong!', 'error');
         } else {
-          console.log(res);
           $scope.project = res;
           $scope.tasks = [
             {
@@ -93,10 +97,38 @@ angular.module('projects').controller('ProjectsController', ['$scope', 'Authenti
     };
     
     /*
+    ** Updates a project (In case of time remaining, secure in back)
+    ** From route '/projects/:projectId/edit'
+    */
+    $scope.update = function(isValid) {
+      
+      var successCallback = function(res) {
+        $state.go('project-view', { projectId: res._id });
+      };
+      
+      var errorCallback = function(err) {
+        swal('Oops...', err.data.message, 'error');
+      };
+      
+      $scope.project.$update(successCallback, errorCallback);
+    };
+    
+    /*
     ** Asks confirmation to user, then removes the project
     */
     $scope.remove = function(project) {
-      console.log('caca');
+      swal({
+        title: 'Are you sure?',
+        text: 'You will not be able to recover your project!',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'Yes, delete it!',
+        closeOnConfirm: true
+      }, function() {
+        project.$delete();
+        $state.go('projects-list');
+      });
     };
   }
 ]);
