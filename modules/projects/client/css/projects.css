@@ -29,3 +29,28 @@ textarea {
 .i-wrapper {
   margin-bottom: 15px;
 }
+
+.t_list {
+  width: 250px;
+  display: inline-block;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid black;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  background-color: grey;
+}
+
+.board {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.card {
+  background-color: white;
+  padding: 5px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  white-space: normal;
+}

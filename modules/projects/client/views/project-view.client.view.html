@@ -1,3 +1,72 @@
 <section ng-controller="ProjectsController" ng-init="read()">
-  This is the Project view
+  <div class="page-header">
+    <h1 ng-bind="project.name"></h1>
+  </div>
+  <div class="pull-right" ng-show="project.isCurrentUserOwner">
+    <a class="btn btn-primary" ui-sref="project-edit({ articleId: project._id })">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-primary" ng-click="remove(project)">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div>
+  <small>
+    <em class="text-muted">
+      Created on
+      <span ng-bind="project.created | date:'mediumDate'"></span>
+      by
+      <span ng-if="project.owner" ng-bind="project.owner.displayName"></span>
+      <span ng-if="!project.owner">Deleted User</span>
+    </em>
+  </small>
+  <p class="lead" ng-bind="project.description"></p>
+  
+  <div class="board">
+      <div class="t_list">
+        <div class="card card-block" ng-repeat="task in tasks">
+          <h4 class="card-title" ng-bind="task.name"></h4>
+          <p class="card-text" ng-bind="task.description | cut:true:50:'...'"></p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+      
+      
+      <div class="t_list">
+        <div class="card card-block" ng-repeat="task in tasks">
+          <h4 class="card-title" ng-bind="task.name"></h4>
+          <p class="card-text" ng-bind="task.description | cut:true:50:'...'"></p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+      <div class="t_list">
+        <div class="card card-block" ng-repeat="task in tasks">
+          <h4 class="card-title" ng-bind="task.name"></h4>
+          <p class="card-text" ng-bind="task.description | cut:true:50:'...'"></p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+      <div class="t_list">
+        <div class="card card-block" ng-repeat="task in tasks">
+          <h4 class="card-title" ng-bind="task.name"></h4>
+          <p class="card-text" ng-bind="task.description | cut:true:50:'...'"></p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+      <div class="t_list">
+        <div class="card card-block" ng-repeat="task in tasks">
+          <h4 class="card-title" ng-bind="task.name"></h4>
+          <p class="card-text" ng-bind="task.description | cut:true:50:'...'"></p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+      
+      
+  </div>
+
+  
 </section>
