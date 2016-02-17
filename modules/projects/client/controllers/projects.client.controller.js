@@ -42,12 +42,10 @@ angular.module('projects').controller('ProjectsController', ['$scope', 'Authenti
       
       var successCallback = function(res) {
         $scope.projects = res;
-        console.log(res);
       };
       
       var errorCallback = function(err) {
-        console.log('ERROR');
-        console.log(err);
+        swal("Oops...", "Something went wrong!", "error");
       };
       
       Projects.query()
