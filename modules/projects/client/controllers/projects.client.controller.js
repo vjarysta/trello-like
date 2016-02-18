@@ -1,13 +1,19 @@
 'use strict';
 
-angular.module('projects').controller('ProjectsController', ['$scope', 'Authentication', 'Admin', 'Projects', '$http', '$stateParams', '$state',
-  function ($scope, Authentication, Admin, Projects, $http, $stateParams, $state) {
+angular.module('projects').controller('ProjectsController', ['$scope', 'Authentication', 'Admin', 'Projects', '$http', '$stateParams', '$state', 'Lists',
+  function ($scope, Authentication, Admin, Projects, $http, $stateParams, $state, Lists) {
     /*
     ** Runs at controller startup
     */
     var myId = '';
+    $scope.states = {
+      newList: false
+    };
     $scope.newProject = {
       members: []
+    };
+    $scope.newList = {
+      name: ''
     };
     if (Authentication.user) {
       Admin.query(function (data) {
@@ -88,8 +94,8 @@ angular.module('projects').controller('ProjectsController', ['$scope', 'Authenti
               description: 'Very cool content'
             },
             {
-              name: 'Stop eating pizza',
-              description: 'No.'
+              name: 'No description',
+              description: ''
             }, 
           ];
         }
@@ -129,6 +135,26 @@ angular.module('projects').controller('ProjectsController', ['$scope', 'Authenti
         project.$delete();
         $state.go('projects-list');
       });
+    };
+    
+    /*
+    ****************************************************************************
+    */
+    
+    /*
+    ** Create a new list in the current project
+    */
+    $scope.createList = function(isValid) {
+      if (!isValid || $scope.newList.name === '') {
+        swal('Oops...', 'Invalid list name', 'error');
+      } else {
+        var list = new Lists();
+        list.name = $scope.newList.name;
+        list.projectId = $scope.project._id;
+        list.$save();
+        console.log($scope.newList);
+        $scope.states.newList = false;
+      }
     };
   }
 ]);

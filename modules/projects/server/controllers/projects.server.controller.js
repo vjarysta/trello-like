@@ -10,12 +10,11 @@ var mongoose = require('mongoose'),
   Project = mongoose.model('Project');
 
 /**
- * Create a 
+ * Create a project
  */
 exports.create = function (req, res) {
   var project = new Project(req.body);
   project.owner = req.user._id;
-  console.log(project);
   project.save(function(err) {
     if (err) {
       return res.status(400).send({

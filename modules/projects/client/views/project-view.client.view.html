@@ -26,8 +26,6 @@
         <div class="card card-block" ng-repeat="task in tasks">
           <h4 class="card-title" ng-bind="task.name"></h4>
           <p class="card-text" ng-bind="task.description | cut:true:50:'...'"></p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
         </div>
       </div>
       
@@ -36,36 +34,43 @@
         <div class="card card-block" ng-repeat="task in tasks">
           <h4 class="card-title" ng-bind="task.name"></h4>
           <p class="card-text" ng-bind="task.description | cut:true:50:'...'"></p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
         </div>
       </div>
       <div class="t_list">
         <div class="card card-block" ng-repeat="task in tasks">
           <h4 class="card-title" ng-bind="task.name"></h4>
           <p class="card-text" ng-bind="task.description | cut:true:50:'...'"></p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
         </div>
       </div>
       <div class="t_list">
         <div class="card card-block" ng-repeat="task in tasks">
           <h4 class="card-title" ng-bind="task.name"></h4>
           <p class="card-text" ng-bind="task.description | cut:true:50:'...'"></p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
         </div>
       </div>
       <div class="t_list">
         <div class="card card-block" ng-repeat="task in tasks">
           <h4 class="card-title" ng-bind="task.name"></h4>
           <p class="card-text" ng-bind="task.description | cut:true:50:'...'"></p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
         </div>
       </div>
-      
-      
+
+      <!--Add button-->
+      <div ng-if="!states.newList" ng-click="states.newList = true" class="create-project-button">
+        <div class="t_list plus-card">
+          <h1 class="white-text i-wrapper">
+            <i class="fa fa-plus-circle"></i>
+          </h1>
+        </div>
+      </div>
+      <!--New list form-->
+      <div ng-if="states.newList" class="in-list">
+        <form name="createListForm" class="form-horizontal" ng-submit="createList(createListForm.$valid);">
+          <fieldset>
+            <input type="text" name="name" placeholder="List name" ng-model="newList.name" />
+          </fieldset>
+        </form>
+      </div>
   </div>
 
   

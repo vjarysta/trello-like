@@ -20,9 +20,14 @@ var ListSchema = new Schema({
     trim: true,
     required: 'You need to specify a name'
   },
+  project: {
+    type: Schema.ObjectId,
+    ref: 'Project'
+  },
   tasks: [{
     type: Schema.ObjectId,
-    ref: 'Task'
+    ref: 'Task',
+    default: []
   }]
 });
 

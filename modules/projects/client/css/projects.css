@@ -13,15 +13,6 @@ textarea {
     resize: vertical;
 }
 
-.plus-card {
-  text-align: center;
-  background-color: #3C763D;
-}
-
-.plus-card:hover {
-  background-color: #305C30 !important;
-}
-
 .white-text {
   color: white;
 }
@@ -42,6 +33,19 @@ textarea {
   background-color: grey;
 }
 
+.card {
+  cursor: pointer;
+}
+
+.plus-card {
+  text-align: center;
+  background-color: #3C763D;
+}
+
+.plus-card:hover {
+  background-color: #305C30 !important;
+}
+
 .board {
   overflow-x: auto;
   white-space: nowrap;
@@ -53,4 +57,19 @@ textarea {
   border-radius: 10px;
   margin-bottom: 5px;
   white-space: normal;
+}
+
+.create-project-button {
+  vertical-align: top;
+  display: inline-block;
+}
+
+.create-project-button:hover {
+  cursor: pointer; 
+}
+
+.in-list {
+  margin-top: 5px;
+  vertical-align: top;
+  display: inline-block;
 }

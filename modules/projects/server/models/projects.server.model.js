@@ -32,6 +32,11 @@ var ProjectsSchema = new Schema({
   members: [{
     type: Schema.ObjectId,
     ref: 'User'
+  }],
+  lists: [{
+    type: Schema.ObjectId,
+    ref: 'List',
+    default: []
   }]
 });
 

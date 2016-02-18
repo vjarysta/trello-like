@@ -14,3 +14,4 @@ How it works :
 
  * [Trello board](https://trello.com/b/9L0VnnHH/trello-like)
  * [MEAN.JS](http://meanjs.org/)
+ * [Cloud9](https://ide.c9.io/vjarysta/mean)
