@@ -22,39 +22,15 @@
   <p class="lead" ng-bind="project.description"></p>
   
   <div class="board">
-      <div class="t_list">
-        <div class="card card-block" ng-repeat="task in tasks">
+      <div class="t_list" ng-repeat="list in project.lists">
+        <h4 class="no-collide" ng-bind="list.name"></h4>
+        <span ng-click="deleteList(list)" class="no-collide delete-list"><i class="fa fa-trash"></i></span>
+        <div ng-click="editTask()" class="card card-block" ng-repeat="task in tasks">
           <h4 class="card-title" ng-bind="task.name"></h4>
           <p class="card-text" ng-bind="task.description | cut:true:50:'...'"></p>
         </div>
       </div>
       
-      
-      <div class="t_list">
-        <div class="card card-block" ng-repeat="task in tasks">
-          <h4 class="card-title" ng-bind="task.name"></h4>
-          <p class="card-text" ng-bind="task.description | cut:true:50:'...'"></p>
-        </div>
-      </div>
-      <div class="t_list">
-        <div class="card card-block" ng-repeat="task in tasks">
-          <h4 class="card-title" ng-bind="task.name"></h4>
-          <p class="card-text" ng-bind="task.description | cut:true:50:'...'"></p>
-        </div>
-      </div>
-      <div class="t_list">
-        <div class="card card-block" ng-repeat="task in tasks">
-          <h4 class="card-title" ng-bind="task.name"></h4>
-          <p class="card-text" ng-bind="task.description | cut:true:50:'...'"></p>
-        </div>
-      </div>
-      <div class="t_list">
-        <div class="card card-block" ng-repeat="task in tasks">
-          <h4 class="card-title" ng-bind="task.name"></h4>
-          <p class="card-text" ng-bind="task.description | cut:true:50:'...'"></p>
-        </div>
-      </div>
-
       <!--Add button-->
       <div ng-if="!states.newList" ng-click="states.newList = true" class="create-project-button">
         <div class="t_list plus-card">
@@ -75,3 +51,22 @@
 
   
 </section>
+
+
+<script type="text/ng-template" id="myModalContent.html">
+  <div class="modal-header">
+    <h3 class="modal-title">I'm a modal!</h3>
+  </div>
+  <div class="modal-body">
+    <ul>
+      <li ng-repeat="item in items">
+        <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+      </li>
+    </ul>
+    Selected: <b>{{ selected.item }}</b>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>
+</script>

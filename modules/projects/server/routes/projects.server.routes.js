@@ -13,6 +13,6 @@ module.exports = function(app) {
     .put(projects.update)
     .delete(projects.delete);
     
-  // Finish by binding the article middleware
+  // Finish by binding the project middleware
   app.param('projectId', projects.ProjectByID);
 };

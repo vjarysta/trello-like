@@ -106,7 +106,7 @@ exports.ProjectByID = function(req, res, next, id) {
     });
   }
   
-  Project.findById(id).populate('owner').exec(function(err, project) {
+  Project.findById(id).populate('owner').populate('lists').exec(function(err, project) {
     if (err) {
       return next(err);
     } else if (!project) {

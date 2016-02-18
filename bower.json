@@ -4,13 +4,13 @@
   "homepage": "http://meanjs.org/",
   "license": "MIT",
   "dependencies": {
-    "angular": "~1.3",
-    "angular-animate": "~1.3",
+    "angular": "~1.4.0",
+    "angular-animate": "~1.4.0",
     "angular-bootstrap": "~1.0",
     "angular-file-upload": "1.1.5",
     "angular-messages": "~1.3.17",
-    "angular-mocks": "~1.3",
-    "angular-resource": "~1.3",
+    "angular-mocks": "~1.4.0",
+    "angular-resource": "~1.4.0",
     "angular-ui-router": "~0.2",
     "angular-ui-utils": "bower",
     "bootstrap": "~3",
@@ -22,6 +22,7 @@
     "components-font-awesome": "~4.5.0"
   },
   "resolutions": {
-    "angular": "~1.3"
+    "angular": "~1.4.0",
+    "chosen": "e-tag:face03d32"
   }
 }

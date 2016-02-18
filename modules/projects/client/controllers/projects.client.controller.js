@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('projects').controller('ProjectsController', ['$scope', 'Authentication', 'Admin', 'Projects', '$http', '$stateParams', '$state', 'Lists',
-  function ($scope, Authentication, Admin, Projects, $http, $stateParams, $state, Lists) {
+angular.module('projects').controller('ProjectsController', ['$scope', 'Authentication', 'Admin', 'Projects', '$http', '$stateParams', '$state', 'Lists', '$uibModal',
+  function ($scope, Authentication, Admin, Projects, $http, $stateParams, $state, Lists, $uibModal) {
     /*
     ** Runs at controller startup
     */
@@ -40,7 +40,7 @@ angular.module('projects').controller('ProjectsController', ['$scope', 'Authenti
           },
           function() {
             $scope.list();
-            $state.go('project-view', { projectId: res._id });
+            $state.go('project-view', { project: res._id });
           });
         }, function(err) {
           swal('Oops...', err.data.message, 'error');
@@ -145,16 +145,59 @@ angular.module('projects').controller('ProjectsController', ['$scope', 'Authenti
     ** Create a new list in the current project
     */
     $scope.createList = function(isValid) {
+      
+      var successCallback = function(res) {
+        $scope.newList = {};
+        $scope.read();
+      };
+      
+      var errorCallback = function(err) {
+        swal('Oops...', err.data.message, 'error');
+      };
+      
       if (!isValid || $scope.newList.name === '') {
         swal('Oops...', 'Invalid list name', 'error');
       } else {
         var list = new Lists();
         list.name = $scope.newList.name;
-        list.projectId = $scope.project._id;
-        list.$save();
-        console.log($scope.newList);
+        list.project = $scope.project._id;
+        list.$save(successCallback, errorCallback);
         $scope.states.newList = false;
       }
+    };
+    
+    /*
+    ** Launches a modal to edit the clicked task
+    */
+    $scope.editTask = function(size) {
+      $scope.items = ['item1', 'item2', 'item3'];
+    
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'myModalContent.html',
+        controller: 'ModalInstanceController',
+        size: size,
+        resolve: {
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (selectedItem) {
+        $scope.selected = selectedItem;
+      }, function () {
+        console.log('Modal dismissed at: ' + new Date());
+      });
+    };
+    
+    $scope.deleteList = function(listToDelete) {
+      var list = new Lists(listToDelete);
+      list.$delete(function(res) {
+        $scope.read();
+      }, function(err) {
+        swal('Oops...', err.data.message, 'error');
+      });
     };
   }
 ]);

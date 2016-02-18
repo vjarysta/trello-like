@@ -8,9 +8,13 @@ module.exports = function(app) {
     .get(lists.list)
     .post(lists.create);
     
-  // app.route('/api/projects/:projectId/list/:listId')
+  app.route('/api/projects/:projectId/list/:listId')
+    .delete(lists.delete);
   //   .get(lists.read)
   //   .put(lists.update)
-  //   .delete(lists.delete);
     
+    
+  // Finish by binding the project & list middleware
+  app.param('projectId', projects.ProjectByID);
+  app.param('listId', lists.ListByID);
 };
