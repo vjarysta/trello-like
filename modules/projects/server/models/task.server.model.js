@@ -28,7 +28,15 @@ var TaskSchema = new Schema({
   members: [{
     type: Schema.ObjectId,
     ref: 'User'
-  }]
+  }],
+  list: {
+    type: Schema.ObjectId,
+    ref: 'List'
+  },
+  project: {
+    type: Schema.ObjectId,
+    ref: 'Project'
+  }
   
 });
 

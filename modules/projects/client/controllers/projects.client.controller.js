@@ -1,18 +1,22 @@
 'use strict';
 
-angular.module('projects').controller('ProjectsController', ['$scope', 'Authentication', 'Admin', 'Projects', '$http', '$stateParams', '$state', 'Lists', '$uibModal',
-  function ($scope, Authentication, Admin, Projects, $http, $stateParams, $state, Lists, $uibModal) {
+angular.module('projects').controller('ProjectsController', ['$scope', 'Authentication', 'Admin', 'Projects', '$http', '$stateParams', '$state', 'Lists', '$uibModal', 'Tasks',
+  function ($scope, Authentication, Admin, Projects, $http, $stateParams, $state, Lists, $uibModal, Tasks) {
     /*
     ** Runs at controller startup
     */
     var myId = '';
     $scope.states = {
-      newList: false
+      newList: false,
+      newTask: {}
     };
     $scope.newProject = {
       members: []
     };
     $scope.newList = {
+      name: ''
+    };
+    $scope.newTask = {
       name: ''
     };
     if (Authentication.user) {
@@ -170,6 +174,9 @@ angular.module('projects').controller('ProjectsController', ['$scope', 'Authenti
     ** Launches a modal to edit the clicked task
     */
     $scope.editTask = function(size) {
+      console.log($scope.states);
+      console.log('hey');
+      
       $scope.items = ['item1', 'item2', 'item3'];
     
       var modalInstance = $uibModal.open({
@@ -198,6 +205,32 @@ angular.module('projects').controller('ProjectsController', ['$scope', 'Authenti
       }, function(err) {
         swal('Oops...', err.data.message, 'error');
       });
+    };
+    
+    /*
+    ****************************************************************************
+    */
+    
+    $scope.createTask = function(list) {
+      var successCallback = function(res) {
+        $scope.newTask = {};
+        $scope.read();
+      };
+      
+      var errorCallback = function(err) {
+        swal('Oops...', err.data.message, 'error');
+      };
+      
+      if ($scope.newTask.name === '') {
+        swal('Oops...', 'Invalid list name', 'error');
+      } else {
+        var task = new Tasks();
+        task.name = $scope.newTask.name;
+        task.list = list._id;
+        task.project = list.project;
+        task.$save(successCallback, errorCallback);
+        $scope.states.newTask = false;
+      }
     };
   }
 ]);

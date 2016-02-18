@@ -22,16 +22,31 @@
   <p class="lead" ng-bind="project.description"></p>
   
   <div class="board">
-      <div class="t_list" ng-repeat="list in project.lists">
+      <div class="t_list create-project-button" ng-repeat="list in project.lists">
         <h4 class="no-collide" ng-bind="list.name"></h4>
         <span ng-click="deleteList(list)" class="no-collide delete-list"><i class="fa fa-trash"></i></span>
         <div ng-click="editTask()" class="card card-block" ng-repeat="task in tasks">
           <h4 class="card-title" ng-bind="task.name"></h4>
           <p class="card-text" ng-bind="task.description | cut:true:50:'...'"></p>
         </div>
+        
+        <!--Add task button-->
+        <div ng-if="!states.newTask[list._id]" ng-click="states.newTask[list._id] = true" class="card card-block plus-card">
+          <h1 class="white-text i-wrapper">
+            <i class="fa fa-plus-circle"></i>
+          </h1>
+        </div>
+        <!--Add task form-->
+        <div ng-if="states.newTask[list._id]">
+          <form name="createTaskForm" class="form-horizontal" ng-submit="createTask(list);">
+            <fieldset style="width: 250px;">
+              <input type="text" name="name" placeholder="Task name" ng-model="newTask.name" />
+            </fieldset>
+          </form>
+        </div>
       </div>
       
-      <!--Add button-->
+      <!--Add List button-->
       <div ng-if="!states.newList" ng-click="states.newList = true" class="create-project-button">
         <div class="t_list plus-card">
           <h1 class="white-text i-wrapper">
@@ -39,7 +54,7 @@
           </h1>
         </div>
       </div>
-      <!--New list form-->
+      <!--Add List form-->
       <div ng-if="states.newList" class="in-list">
         <form name="createListForm" class="form-horizontal" ng-submit="createList(createListForm.$valid);">
           <fieldset>

@@ -41,7 +41,7 @@ textarea {
 
 .plus-card {
   text-align: center;
-  background-color: #3C763D;
+  background-color: #3C763D !important;
 }
 
 .plus-card:hover {
