@@ -35,3 +35,10 @@ a:hover .header-profile-image {
 .has-error .help-inline.error-text {
   display: inline;
 }
+
+.logo {
+  max-height: 50px;
+  position: relative;
+  bottom: 15px;
+  right: 15px;
+}
