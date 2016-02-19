@@ -79,7 +79,6 @@ angular.module('projects').controller('ProjectsController', ['$scope', 'Authenti
         if (err) {
           swal('Oops...', 'Something went wrong!', 'error');
         } else {
-          console.log(res);
           $scope.project = res;
           $scope.tasks = [
             {
@@ -171,34 +170,6 @@ angular.module('projects').controller('ProjectsController', ['$scope', 'Authenti
       }
     };
     
-    /*
-    ** Launches a modal to edit the clicked task
-    */
-    $scope.editTask = function(size) {
-      console.log($scope.states);
-      console.log('hey');
-      
-      $scope.items = ['item1', 'item2', 'item3'];
-    
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'myModalContent.html',
-        controller: 'ModalInstanceController',
-        size: size,
-        resolve: {
-          items: function () {
-            return $scope.items;
-          }
-        }
-      });
-
-      modalInstance.result.then(function (selectedItem) {
-        $scope.selected = selectedItem;
-      }, function () {
-        console.log('Modal dismissed at: ' + new Date());
-      });
-    };
-    
     $scope.deleteList = function(listToDelete) {
       var list = new Lists(listToDelete);
       list.$delete(function(res) {
@@ -233,5 +204,41 @@ angular.module('projects').controller('ProjectsController', ['$scope', 'Authenti
         $scope.states.newTask = false;
       }
     };
+    
+        
+    /*
+    ** Launches a modal to edit the clicked task
+    */
+    $scope.editTask = function(task) {
+      $scope.items = ['item1', 'item2', 'item3'];
+    
+      var modalInstance = $uibModal.open({
+        animation: true,
+        templateUrl: 'modules/projects/client/views/modals/edit-task-modal.client.view.html',
+        controller: 'EditTaskModalController',
+        size: 'md',
+        resolve: {
+          task: function () {
+            return task;
+          },
+          users: function() {
+            return $scope.users;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (task) {
+        var taskInstance = new Tasks(task);
+        taskInstance.$update(function(res) {
+          $scope.read();
+          console.log(res);
+        });
+      }, function (message) {
+        if (message === 'deleted') {
+          $scope.read();          
+        }
+      });
+    };
+
   }
 ]);

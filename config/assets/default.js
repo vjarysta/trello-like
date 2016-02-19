@@ -25,7 +25,8 @@ module.exports = {
         'public/lib/underscore/underscore-min.js',
         'public/lib/chosen/chosen.jquery.min.js',
         'public/lib/angular-chosen-localytics/chosen.js',
-        'public/lib/sweetalert/dist/sweetalert.min.js'
+        'public/lib/sweetalert/dist/sweetalert.min.js',
+        'public/lib/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

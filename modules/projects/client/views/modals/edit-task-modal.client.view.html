@@ -1,0 +1,44 @@
+<section>
+  <div class="modal-header">
+    <h3 class="modal-title" ng-bind="task.name"></h3>
+    <div class="pull-right">
+      <a class="btn btn-primary" ng-click="removeTask(task)">
+        <i class="glyphicon glyphicon-trash"></i>
+      </a>
+    </div>
+  </div>
+  <div class="modal-body">
+    <form name="editTaskForm" class="form-horizontal" ng-submit="ok()">
+      <fieldset>
+        <!-- Name -->
+        <div class="form-group" show-errors>
+          <label class="control-label" for="name">Name</label>
+          <input name="name" type="text" ng-model="task.name" class="form-control" placeholder="Name" required ng-trim />
+          <div ng-messages="createProjectForm.name.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Project name is required.</p>
+          </div>
+        </div>
+        <!-- Description -->
+        <div class="form-group">
+          <label class="control-label" for="description">Description</label>
+          <textarea name="description" data-ng-model="task.description" id="description" class="form-control" cols="30" rows="10" placeholder="Description"></textarea>
+        </div>
+        <!-- Members -->
+        <div class="form-group">
+          <select
+            data-placeholder="Choose your members..."
+            class="chosen-select"
+            ng-model="task.members"
+            ng-options="user._id as user.username for user in users"
+            chosen
+            multiple>
+          </select>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>
+</section>

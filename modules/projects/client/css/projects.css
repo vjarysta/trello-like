@@ -86,3 +86,7 @@ textarea {
   top: 5px;
   cursor: pointer;
 }
+
+.chosen-container{
+  width: 30% !important;
+}

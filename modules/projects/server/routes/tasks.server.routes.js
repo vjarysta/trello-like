@@ -10,9 +10,9 @@ module.exports = function(app) {
     .post(tasks.create);
     
   app.route('/api/projects/:projectId/list/:listId/task/:taskId')
-    .delete(tasks.delete);
+    .delete(tasks.delete)
+    .put(tasks.update);
   //   .get(lists.read)
-  //   .put(lists.update)
     
     
   // Finish by binding the project & list middleware
