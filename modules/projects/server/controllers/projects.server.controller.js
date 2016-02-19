@@ -114,8 +114,17 @@ exports.ProjectByID = function(req, res, next, id) {
         message: 'No project with that identifier has been found'
       });
     }
-    req.project = project;
-    next();
+    // Populates tasks
+    Project.populate(project, { path: 'lists.tasks', model: 'Task' }, function(err, tasks) {
+      if (err) {
+        return res.status(400).send({
+          message: 'Cannot populate tasks'
+        });
+      } else {
+        req.project = project;
+        next();
+      }
+    });
   });
   
 };

@@ -109,7 +109,7 @@ exports.ListByID = function(req, res, next, id) {
     });
   }
   
-  List.findById(id).exec(function(err, list) {
+  List.findById(id).populate('tasks').exec(function(err, list) {
     if (err) {
       return next(err);
     } else if (!list) {

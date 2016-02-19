@@ -79,6 +79,7 @@ angular.module('projects').controller('ProjectsController', ['$scope', 'Authenti
         if (err) {
           swal('Oops...', 'Something went wrong!', 'error');
         } else {
+          console.log(res);
           $scope.project = res;
           $scope.tasks = [
             {
