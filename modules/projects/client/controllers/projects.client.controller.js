@@ -44,7 +44,7 @@ angular.module('projects').controller('ProjectsController', ['$scope', 'Authenti
           },
           function() {
             $scope.list();
-            $state.go('project-view', { project: res._id });
+            $state.go('project-view', { projectId: res._id });
           });
         }, function(err) {
           swal('Oops...', err.data.message, 'error');
